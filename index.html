@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Luna — My Dog</title>
+<style>
+:root{--bg:#101114;--panel:#1b1d22;--panel2:#24272e;--text:#f5f5f5;--muted:#a7a9b0;--accent:#ff8a24;--line:#343740;--good:#7ed6a5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:24px 18px 18px;background:linear-gradient(135deg,#24170f,#111114 65%);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:800}
+h1{margin:6px 0 2px;font-size:32px;letter-spacing:1px}.sub{color:var(--muted);font-size:14px}
+.pill{border:1px solid #75451f;color:#ffb36c;border-radius:999px;padding:7px 10px;font-size:12px}
+main{max-width:760px;margin:auto;padding:16px 14px 90px}
+.hero{background:linear-gradient(120deg,#332014,#202127);border:1px solid #5b3923;border-radius:20px;padding:18px;margin-bottom:16px}
+.hero strong{font-size:18px}.hero p{color:#ddd;margin:6px 0 0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.stat{background:#17191e;border-radius:14px;padding:11px}.stat b{display:block;color:var(--accent);font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+nav{display:flex;gap:7px;overflow:auto;padding:4px 0 14px;scrollbar-width:none}
+nav button{white-space:nowrap;background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:650}
+nav button.active{background:var(--accent);border-color:var(--accent);color:#21150c}
+section{display:none}section.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin:0 0 12px}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;margin:0 0 6px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.small{font-size:13px;color:var(--muted)}.tag{font-size:11px;color:var(--accent);font-weight:700}
+button,.btn{cursor:pointer} .primary{background:var(--accent);color:#20140b;border:0;border-radius:11px;padding:11px 14px;font-weight:800}
+.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+input,select,textarea{width:100%;background:#111318;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px;margin:5px 0 10px;font:inherit}
+label{font-size:12px;color:var(--muted)}.item{padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}
+.check{display:flex;align-items:center;gap:10px}.check input{width:18px;margin:0;accent-color:var(--accent)}
+.done{text-decoration:line-through;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+footer{position:fixed;bottom:0;left:0;right:0;background:#101114ed;border-top:1px solid var(--line);padding:10px;text-align:center;color:var(--muted);font-size:11px;backdrop-filter:blur(10px)}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}
+@media(min-width:600px){header{padding-left:max(18px,calc((100% - 730px)/2));padding-right:max(18px,calc((100% - 730px)/2))}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top"><div class="brand">MY DOG • JISHNU EDITION</div><div class="pill">6 MONTHS</div></div>
+ <h1>LUNA 🐾</h1><div class="sub">Belgian Malinois · Your companion's care hub</div>
+</header>
+<main>
+ <div class="hero">
+  <div class="row"><div><strong>Welcome, Jishnu!</strong><p>Small steps every day make a confident, happy dog.</p></div><div style="font-size:42px">🐕</div></div>
+  <div class="stats"><div class="stat"><b id="trainingCount">0</b><span>LESSONS DONE</span></div><div class="stat"><b id="careCount">0</b><span>CARE TASKS</span></div><div class="stat"><b>6 mo</b><span>LUNA'S AGE</span></div></div>
+ </div>
+ <nav>
+  <button class="active" data-tab="home">Home</button><button data-tab="training">Training</button><button data-tab="care">Daily Care</button><button data-tab="health">Health</button><button data-tab="profile">Profile</button>
+ </nav>
+ <section id="home" class="active">
+  <div class="card"><h2>Today's plan</h2><div id="todayPlan" class="small">Your daily checklist is ready. Open Daily Care to mark tasks complete.</div></div>
+  <div class="card"><h2>Training focus</h2><h3>Build the basics first</h3><p class="small">Keep sessions short (about 3–5 minutes), reward calm behaviour, and finish on a success. Avoid harsh corrections.</p><button class="primary" onclick="showTab('training')">Start training</button></div>
+  <div class="card"><h2>Quick reminder</h2><p class="small">Keep fresh water available. Adjust food portions and exercise to Luna's body condition and your veterinarian's advice.</p></div>
+ </section>
+ <section id="training">
+  <div class="card"><h2>Training tracker</h2><p class="small">Tick a lesson when Luna can do it reliably in a quiet place. Practise around distractions gradually.</p><div id="trainingList"></div></div>
+  <div class="card"><h3>Training tip</h3><p class="small">Use reward-based training: mark the behaviour with “Yes!” and reward immediately. For biting, fear, or reactivity, seek a qualified reward-based trainer.</p></div>
+ </section>
+ <section id="care">
+  <div class="card"><h2>Daily care checklist</h2><p class="small">Tick tasks as you complete them. Progress is saved on this device.</p><div id="careList"></div></div>
+  <div class="card"><h2>Add a care reminder</h2><label>Task</label><input id="careTask" placeholder="e.g. Evening walk"><label>Time</label><input id="careTime" type="time"><button class="primary" onclick="addReminder()">Add reminder</button><div id="reminders"></div><p class="small">In-app reminders are saved here; browser notifications depend on device permission and may not run when the app is closed.</p></div>
+ </section>
+ <section id="health">
+  <div class="card"><h2>Health records</h2><p class="small">Record dates recommended by your veterinarian. This app does not replace veterinary advice.</p><label>Record / vaccine name</label><input id="healthName" placeholder="e.g. Vaccination / deworming"><label>Date</label><input id="healthDate" type="date"><label>Notes</label><textarea id="healthNote" rows="2" placeholder="Vet, dose, next due date..."></textarea><button class="primary" onclick="addHealth()">Save health record</button><div id="healthList"></div></div>
+ </section>
+ <section id="profile">
+  <div class="card"><h2>Luna's profile</h2><label>Dog's name</label><input id="dogName" value="Luna"><label>Breed</label><input id="dogBreed" value="Belgian Malinois"><label>Age</label><input id="dogAge" value="6 months"><label>Owner</label><input id="ownerName" value="Jishnu"><button class="primary" onclick="saveProfile()">Save profile</button></div>
+  <div class="card"><h2>App data</h2><p class="small">Your entries are stored locally in this browser on this device.</p><button class="secondary" onclick="exportData()">Export backup</button> <button class="secondary" onclick="resetData()">Reset app data</button></div>
+ </section>
+</main>
+<footer>Made with ❤️ for Luna · Jishnu</footer>
+<script>
+const training=["Name response","Sit","Down","Stay (short duration)","Come / recall","Loose-leash walking","Leave it","Drop it","Wait at doors","Calm greeting","Speak (optional)","Settle on a mat"];
+const care=["Fresh water check","Morning meal","Short walk / play","Training session","Grooming & paw check","Evening meal","Calm enrichment / chew"];
+const defaults={training:{},care:{},reminders:[],health:[],profile:{name:"Luna",breed:"Belgian Malinois",age:"6 months",owner:"Jishnu"}};
+let data={...defaults,...JSON.parse(localStorage.getItem("lunaData")||"{}")};
+function save(){localStorage.setItem("lunaData",JSON.stringify(data));render()}
+function showTab(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id))}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+function renderChecks(id,items,key){document.getElementById(id).innerHTML=items.map((t,i)=>`<div class="item"><label class="check"><input type="checkbox" ${data[key][i]?"checked":""} onchange="data.${key}[${i}]=this.checked;save()"><span class="${data[key][i]?"done":""}">${t}</span></label></div>`).join("")}
+function render(){
+ renderChecks("trainingList",training,"training");renderChecks("careList",care,"care");
+ document.getElementById("trainingCount").textContent=Object.values(data.training).filter(Boolean).length;
+ document.getElementById("careCount").textContent=Object.values(data.care).filter(Boolean).length;
+ document.getElementById("todayPlan").textContent=`${Object.values(data.care).filter(Boolean).length} of ${care.length} daily care tasks completed.`;
+ document.getElementById("reminders").innerHTML=data.reminders.length?data.reminders.map((r,i)=>`<div class="item row"><span>${r.task} <span class="small">${r.time||""}</span></span><button class="secondary" onclick="removeReminder(${i})">Remove</button></div>`).join(""):'<div class="empty">No custom reminders yet.</div>';
+ document.getElementById("healthList").innerHTML=data.health.length?data.health.map((h,i)=>`<div class="item"><div class="row"><b>${escapeHtml(h.name)}</b><button class="secondary" onclick="removeHealth(${i})">Delete</button></div><div class="small">${escapeHtml(h.date)} · ${escapeHtml(h.note)}</div></div>`).join(""):'<div class="empty">No health records saved yet.</div>';
+}
+function escapeHtml(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function addReminder(){let task=document.getElementById("careTask").value.trim(),time=document.getElementById("careTime").value;if(!task)return alert("Enter a task name.");data.reminders.push({task,time});document.getElementById("careTask").value="";save()}
+function removeReminder(i){data.reminders.splice(i,1);save()}
+function addHealth(){let name=document.getElementById("healthName").value.trim(),date=document.getElementById("healthDate").value,note=document.getElementById("healthNote").value.trim();if(!name)return alert("Enter a record name.");data.health.push({name,date,note});document.getElementById("healthName").value="";document.getElementById("healthDate").value="";document.getElementById("healthNote").value="";save()}
+function removeHealth(i){data.health.splice(i,1);save()}
+function saveProfile(){data.profile={name:document.getElementById("dogName").value,breed:document.getElementById("dogBreed").value,age:document.getElementById("dogAge").value,owner:document.getElementById("ownerName").value};document.querySelector("h1").textContent=data.profile.name+" 🐾";save();alert("Profile saved.")}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="luna-dog-app-backup.json";a.click();URL.revokeObjectURL(a.href)}
+function resetData(){if(confirm("Delete all Luna app data from this browser?")){localStorage.removeItem("lunaData");data=JSON.parse(JSON.stringify(defaults));save()}}
+document.getElementById("dogName").value=data.profile.name;document.getElementById("dogBreed").value=data.profile.breed;document.getElementById("dogAge").value=data.profile.age;document.getElementById("ownerName").value=data.profile.owner;document.querySelector("h1").textContent=data.profile.name+" 🐾";
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+render();
+</script>
+</body></html>
